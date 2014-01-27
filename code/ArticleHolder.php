@@ -6,6 +6,33 @@ class ArticleHolder extends Page {
 	
 	public static $allowed_children = array('ArticlePage');
 	
+	private static $has_many = array(
+		'Categories' => 'NewsCategory'
+	);
+	
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+		
+		$this->addCategoriesTab($fields);
+		
+		return $fields;
+	}
+	
+	private function addCategoriesTab($fields) {
+		
+		$config = GridFieldConfig_RecordEditor::create();
+		$config->addComponent(new GridFieldSortableRows('SortOrder'));
+		
+        $categoriesField = new GridField(
+            'Categories',
+            'Categories',
+            $this->Categories(),
+            $config
+        );
+		
+		$fields->addFieldToTab('Root.Categories', $categoriesField);
+	}
+	
 	//getters
 	
 	public function Articles($year = NULL) {
@@ -19,6 +46,10 @@ class ArticleHolder extends Page {
 		return ArticlePage::get()->where($filter)->sort('Date DESC');
 		
 	}
+
+	public function RecentArticles($count = 5) {
+		return ArticlePage::get()->filter('ParentID', $this->ID)->sort('Date DESC')->limit($count);
+	}
 	
 }
 
@@ -26,7 +57,6 @@ class ArticleHolder_Controller extends Page_Controller {
 	
 	public static $allowed_actions = array(
 		'index',
-		'archive',
 		'category',
 		'SearchForm'
 	);
@@ -37,14 +67,12 @@ class ArticleHolder_Controller extends Page_Controller {
 
 		$perPage = $this->dataRecord->config()->get('articles_per_page');
 			
-		if ($this->IsArchive()) {
-			$articles = $this->Articles();
-		} else if ($this->IsCategory()) {
+		if ($this->IsCategory()) {
 			$articles = $this->CurrentCategory()->SortedArticles();
 		} else {
-			$articles = $this->Articles($this->CurrentYear());
+			$articles = $this->Articles();
 		}
-		
+			
 		$paginatedList = new PaginatedList($articles, $this->request);
 		$paginatedList->setPageLength($perPage);
 		
@@ -55,10 +83,6 @@ class ArticleHolder_Controller extends Page_Controller {
 		return date('Y');
 	}
 	
-	public function IsArchive() {
-		return ($this->request->latestParam('Action') == 'archive');
-	}
-	
 	public function IsCategory() {
 		return ($this->request->latestParam('Action') == 'category');
 	}
@@ -66,11 +90,6 @@ class ArticleHolder_Controller extends Page_Controller {
 	public function CurrentCategory() {
 		$segment = $this->request->latestParam('ID');
 		return NewsCategory::get()->filter('URLSegment', $segment)->First();
-	}
-	
-	public function Categories() {
-		//TODO remove categories that have no articles
-		return NewsCategory::get();
 	}
 	
 	public function SearchForm() {

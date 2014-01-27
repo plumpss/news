@@ -49,8 +49,10 @@ class ArticlePage extends Page {
 		$config = GridFieldConfig_RelationEditor::create();
 		
 		$config->getComponentByType('GridFieldDataColumns')->setDisplayFields(array('Title' => 'Title'));
-		
 		$config->getComponentByType('GridFieldAddExistingAutocompleter')->setPlaceholderText('Search for an existing category');
+		
+		$config->removeComponentsByType('GridFieldAddNewButton');
+		$config->removeComponentsByType('GridFieldEditButton');
 		
 		$categoriesField = new GridField(
 			'Categories', // Field name
