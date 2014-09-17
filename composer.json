@@ -1,0 +1,21 @@
+{
+	"name": "plumpss/news",
+	"description": "SilverStripe module for news pages.",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "module", "news"],
+	"license": "MIT",
+	"authors": [
+	{
+		"name": "James Howard",
+		"email": "james@plumpdigital.co.uk"
+	}],
+	"require": {
+		"silverstripe/framework": ">=3.0.1"
+	},
+	"support": {
+		"issues": "https://github.com/plumpdigital/plump_news/issues"
+	},
+	"extra": {
+		"installer-name": "plumpss_news"
+	}
+}
