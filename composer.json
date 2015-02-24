@@ -16,6 +16,6 @@
 		"issues": "https://github.com/plumpdigital/plump_news/issues"
 	},
 	"extra": {
-		"installer-name": "plumpss_news"
+		"installer-name": "plumpss-news"
 	}
 }
