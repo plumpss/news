@@ -2,7 +2,7 @@
 
 class ArticlePage extends Page {
 	
-	public static $icon = 'plump_news/images/icons/article.png';
+	public static $icon = 'plumpss-news/images/icons/article.png';
 	
 	public static $can_be_root = FALSE;
 	

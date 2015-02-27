@@ -2,7 +2,7 @@
 
 class ArticleHolder extends Page {
 	
-	public static $icon = 'plump_news/images/icons/news.png';
+	public static $icon = 'plumpss-news/images/icons/news.png';
 	
 	public static $allowed_children = array('ArticlePage');
 	
