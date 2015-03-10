@@ -10,7 +10,7 @@ class ArticlePage extends Page {
 
 	private static $defaults = array(
 		'ShowInMenus' => FALSE
-	}
+	);
 	
 	public static $db = array(
 		'Date' 		=> 'Date',
