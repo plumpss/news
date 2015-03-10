@@ -7,6 +7,10 @@ class ArticlePage extends Page {
 	public static $can_be_root = FALSE;
 	
 	public static $use_summary = TRUE;
+
+	private static $defaults = array(
+		'ShowInMenus' => FALSE
+	}
 	
 	public static $db = array(
 		'Date' 		=> 'Date',
