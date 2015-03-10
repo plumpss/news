@@ -22,7 +22,7 @@ class ArticlePage extends Page {
 	);
 	
 	public static $defaults = array(
-		'ShowInMenus' => FALSE
+		'ShowInMenus' => FALSE,
 		'Date'        => 'now'
 	);
 	
