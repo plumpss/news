@@ -9,7 +9,7 @@ class ArticlePage extends Page {
 	public static $use_summary = TRUE;
 
 	private static $defaults = array(
-		'ShowInMenus' => FALSE
+		
 	);
 	
 	public static $db = array(
@@ -26,7 +26,8 @@ class ArticlePage extends Page {
 	);
 	
 	public static $defaults = array(
-		'Date' => 'now'
+		'ShowInMenus' => FALSE
+		'Date'        => 'now'
 	);
 	
 	 public function getCMSFields() {
