@@ -19,9 +19,14 @@ class NewsCategory extends DataObject {
 	public static $default_sort = 'SortOrder';
 	
 	public function getCMSFields() {
-		return new FieldList(
-			new TextField('Title')
-		);
+		$fields = parent::getCMSFields();
+
+		// Remove fields that are automatically set.
+		$fields->removeByName('SortOrder');
+		$fields->removeByName('ArticleHolderID');
+		$fields->removeByName('Articles');
+
+		return $fields;
 	}
 	
 	public function onBeforeWrite() {
